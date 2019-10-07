@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{D564835E-618A-4240-9841-1D5D4D94B012}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>datastructures</RootNamespace>
+    <RootNamespace>dt</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -155,7 +155,6 @@
     <ClInclude Include="doubly_list.h" />
     <ClInclude Include="doubly_node.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="Header.h" />
     <ClInclude Include="line.h" />
     <ClInclude Include="linked_list.h" />
     <ClInclude Include="lists.h" />

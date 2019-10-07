@@ -57,9 +57,6 @@
     <ClInclude Include="node.h">
       <Filter>Helpers\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
-      <Filter>Helpers\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="doubly_node.h">
       <Filter>Helpers\Header Files</Filter>
     </ClInclude>
