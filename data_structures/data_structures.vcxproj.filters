@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Associative">
+      <UniqueIdentifier>{540923b3-375d-4240-86f8-715ba262f178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Associative\Header Files">
+      <UniqueIdentifier>{cfb943a7-24ae-4a3c-abaa-9e96b0ea3829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Associative\Source Files">
+      <UniqueIdentifier>{95cb74a3-61e5-49eb-b619-9bc5934dd509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{c5ab94e4-8117-4ea2-8963-03e2f84899ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\Header Files">
+      <UniqueIdentifier>{5b397fc9-306c-428c-b6d6-46949820c87f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\Source Files">
+      <UniqueIdentifier>{d4486ed0-e180-46e3-9ac4-9d3b35e2761e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sequential">
+      <UniqueIdentifier>{f024c616-be54-47fd-b36b-498ff69fa859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sequential\Header Files">
+      <UniqueIdentifier>{8738404a-d1b9-4273-b8fa-005debb5e30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sequential\Source Files">
+      <UniqueIdentifier>{6a19542e-102b-4e75-88c8-5c0a56a1bfdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Adapters">
+      <UniqueIdentifier>{29b34267-8cef-4d86-8d47-53076f6d8c26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Adapters\Header Files">
+      <UniqueIdentifier>{09924544-4718-4b5e-b0e5-f96808bceefa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="array_list.h">
+      <Filter>Sequential\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linked_list.h">
+      <Filter>Sequential\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="doubly_list.h">
+      <Filter>Sequential\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lists.h">
+      <Filter>Sequential\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="line.h">
+      <Filter>Adapters\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pile.h">
+      <Filter>Adapters\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="node.h">
+      <Filter>Helpers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Helpers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="doubly_node.h">
+      <Filter>Helpers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Helpers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tree_set.h">
+      <Filter>Associative\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Helpers\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="array_list.cpp">
+      <Filter>Sequential\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linked_list.cpp">
+      <Filter>Sequential\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="doubly_list.cpp">
+      <Filter>Sequential\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Helpers\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_set.cpp">
+      <Filter>Associative\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
