@@ -85,7 +85,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -115,7 +115,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -155,12 +155,15 @@
     <ClInclude Include="doubly_list.h" />
     <ClInclude Include="doubly_node.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="helper.h" />
     <ClInclude Include="line.h" />
     <ClInclude Include="linked_list.h" />
     <ClInclude Include="lists.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Pile.h" />
+    <ClInclude Include="rb_node.h" />
+    <ClInclude Include="tree_map.h" />
     <ClInclude Include="tree_set.h" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +176,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="tree_map.cpp" />
     <ClCompile Include="tree_set.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -69,6 +69,15 @@
     <ClInclude Include="framework.h">
       <Filter>Helpers\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tree_map.h">
+      <Filter>Associative\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rb_node.h">
+      <Filter>Helpers\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h">
+      <Filter>Helpers\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="array_list.cpp">
@@ -84,6 +93,9 @@
       <Filter>Helpers\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tree_set.cpp">
+      <Filter>Associative\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tree_map.cpp">
       <Filter>Associative\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

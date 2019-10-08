@@ -19,9 +19,12 @@ namespace dt
 {
 	template <class C> class tree_set
 	{
+		//----------------------------------
+		//			DATA MEMBERS
+		//----------------------------------
 		//_head of the Tree-set, size MEMBER VARIABLES
-		doubly_node<C>* root_tree;
-		unsigned int length_tree;
+		doubly_node<C>* root_;
+		unsigned int length_;
 		//----------------------------------
 		//		PRIVATE METHOD MEMBERS
 		//----------------------------------
@@ -71,7 +74,9 @@ namespace dt
 		tree_set<C>& operator=(const tree_set<C>& set);
 		tree_set<C>& operator=(tree_set<C>&& r_set) noexcept;
 		tree_set<C>& operator=(C&& r_value);
-		//destructor
+		//----------------------------------
+		//				DESTRUCTOR
+		//----------------------------------
 		~tree_set();
 	};
 }

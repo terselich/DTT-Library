@@ -25,7 +25,7 @@ namespace dt
 	//template options limitation
 	using Sequence = typename std::enable_if < std::is_same<linked_list<C>, Linear>::value ||
 		std::is_same<array_list<C>, Linear>::value ||
-		std::is_same<ring<C>, Linear>::value,
+		std::is_same<doubly_list<C>, Linear>::value,
 		Linear>::type;
 	//queue class
 	template <class Class, class Sequence = array_list<Class>> class line

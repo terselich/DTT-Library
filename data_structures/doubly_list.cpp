@@ -16,14 +16,14 @@ namespace dt
 	//deep copy
 	template <class S> doubly_list<S>::doubly_list(const doubly_list<S>& copy) : length_{ copy.size() }
 	{
-		const S _head_temp = copy.head_->key_;
+		const S _head_temp = copy.head_->data_;
 		//copy list
 		head_ = new doubly_node<S>{ _head_temp };
 		doubly_node<S> a{ copy.head->right }, b{ head_ };
 		//copy every node in order
 		while (a != nullptr)
 		{
-			const S temp = a->key_;
+			const S temp = a->data_;
 			b->right = new doubly_node<S>{ temp };
 			//b next left pointer to b
 			b->right->left = b;
@@ -249,7 +249,7 @@ namespace dt
 	}
 	template<class S> const S& doubly_list<S>::get_head() const
 	{
-		return head_->key_;
+		return head_->data_;
 	}
 	template<class S> S& doubly_list<S>::get_head()
 	{
@@ -257,7 +257,7 @@ namespace dt
 	}
 	template<class S> const S& doubly_list<S>::get_tail() const
 	{
-		return tail_->key_;
+		return tail_->data_;
 	}
 	template<class S> S& doubly_list<S>::get_tail()
 	{
@@ -266,8 +266,8 @@ namespace dt
 	//get at index given
 	template<class S> const S& doubly_list<S>::get_at(const size_t index) const
 	{
-		if (index == 0) return head_->key_;
-		if (index == length_ - 1) return tail_->key_;
+		if (index == 0) return head_->data_;
+		if (index == length_ - 1) return tail_->data_;
 		if (index >= length_) throw 0;
 		//when the index is less than the half of the list
 		if (index <= (length_ - 1) / 2)
@@ -481,7 +481,7 @@ namespace dt
 		if (&list == this) return *this;
 		//delete current list
 		if (head_ != nullptr && tail_ != nullptr) this->empty();
-		const S _head_temp = list.head_->key_;
+		const S _head_temp = list.head_->data_;
 		//copy list
 		length_ = list.size();
 		head_ = new doubly_node<S>{ _head_temp };
@@ -489,7 +489,7 @@ namespace dt
 		//copy every node in order
 		while (a != nullptr)
 		{
-			const S temp = a->key_;
+			const S temp = a->data_;
 			b->right = new doubly_node<S>{ temp };
 			//b next left pointer to b
 			b->right->left = b;

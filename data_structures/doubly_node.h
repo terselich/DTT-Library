@@ -19,9 +19,9 @@ namespace  dt
 {
 	template<class E> class doubly_node
 	{
+	protected:
 		template<class S> friend class doubly_list;
 		template<class S> friend class tree_set;
-		template<class S> friend class ring;
 		//----------------------------------
 		//			DATA MEMBERS
 		//----------------------------------
@@ -31,21 +31,21 @@ namespace  dt
 			NULL<----o| key |o---->NULL
 					+-+-----+-+
 		*/
-		E key_;
+		E data_;
 		//----------------------------------
 		//				CONSTRUCTORS
 		//----------------------------------
 		//private constructors only friend classes can instantiate it
-		explicit doubly_node(E&& r_ref) noexcept : key_{ std::move(r_ref) } {}
-		explicit doubly_node(const E& data) : key_{ data } {}
+		explicit doubly_node(E&& r_ref) noexcept : data_{ std::move(r_ref) } {}
+		explicit doubly_node(const E& data) : data_{ data } {}
 		explicit doubly_node(const E* data) : doubly_node(&data) {}
 	public:
 		//public member variables
 		doubly_node<E>* left{ nullptr }, * right{ nullptr };
 		//copy constructor
-		doubly_node(const doubly_node<E>& ref) : key_{ ref.get_key() } {}
+		doubly_node(const doubly_node<E>& ref) : data_{ ref.get_key() } {}
 		//move constructor
-		doubly_node(doubly_node<E>&& r_ref) noexcept : key_{ r_ref.get_key() }, left{ r_ref.left }, right{ r_ref.right }
+		doubly_node(doubly_node<E>&& r_ref) noexcept : data_{ r_ref.get_key() }, left{ r_ref.left }, right{ r_ref.right }
 		{
 			//pointer dangling
 			if (r_ref.left != nullptr) r_ref.left = nullptr;
@@ -56,7 +56,7 @@ namespace  dt
 		//----------------------------------
 		doubly_node<E>& operator=(const E& value)
 		{
-			key_ = value;
+			data_ = value;
 			return *this;
 		}
 
@@ -65,7 +65,7 @@ namespace  dt
 			//self assignment
 			if (&copy == this) return *this;
 			//key copy
-			key_ = copy.get_key();
+			data_ = copy.get_key();
 			return *this;
 		}
 
@@ -74,13 +74,13 @@ namespace  dt
 			//self assignment
 			if (&data == this) return *this;
 			//move or change ownership
-			key_ = data.get_key();
+			data_ = data.get_key();
 			return *this;
 		}
 
 		doubly_node<E>& operator=(E&& data)
 		{
-			key_ = data;
+			data_ = data;
 			return *this;
 		}
 
@@ -117,7 +117,7 @@ namespace  dt
 		//getter and setter
 		const E& get_key() const
 		{
-			return key_;
+			return data_;
 		}
 		//casting conversion
 		E& get_key()
@@ -127,7 +127,7 @@ namespace  dt
 
 		void set_key(const E& data)
 		{
-			key_ = data;
+			data_ = data;
 		}
 		//swap values
 		bool swap(doubly_node<E>& a, doubly_node<E>& b) noexcept

@@ -14,33 +14,33 @@ namespace dt
 		if (head_node == nullptr)
 		{
 			head_node = new doubly_node<C>{ new_node };
-			length_tree++;
+			length_++;
 			return head_node;
 		}
 		//when data value is less than the parent value
-		if (new_node < head_node->key_)
+		if (new_node < head_node->data_)
 		{
 			head_node->left = insert_recursively(new_node, head_node->left);
 		}
 		//when data is more than parent value
-		else if (new_node > head_node->key_)
+		else if (new_node > head_node->data_)
 		{
 			head_node->right = insert_recursively(new_node, head_node->right);
 		}
 		//get balance of heights left and right
 		const int balance = get_balance(head_node);
 		//balance tree value, if balance more than 1, each rotation case
-		if (balance > 1 && new_node < head_node->left->key_) return right_rotate(head_node);
+		if (balance > 1 && new_node < head_node->left->data_) return right_rotate(head_node);
 		// Right-right Case  
-		if (balance < -1 && new_node > head_node->right->key_) return left_rotate(head_node);
+		if (balance < -1 && new_node > head_node->right->data_) return left_rotate(head_node);
 		// Left-right Case  
-		if (balance > 1 && new_node > head_node->left->key_)
+		if (balance > 1 && new_node > head_node->left->data_)
 		{
 			head_node->left = left_rotate(head_node->left);
 			return right_rotate(head_node);
 		}
 		// Right-left Case  
-		if (balance < -1 && new_node < head_node->right->key_)
+		if (balance < -1 && new_node < head_node->right->data_)
 		{
 			head_node->right = right_rotate(head_node->right);
 			return left_rotate(head_node);
@@ -70,9 +70,9 @@ namespace dt
 			return false;
 		}
 		//when the data value is equal
-		if (head_node->key_ == data) return true;	//return true
+		if (head_node->data_ == data) return true;	//return true
 		bool temp;
-		if (data > head_node->key_) temp = search_recursively(data, head_node->right); //look on the right for data more than
+		if (data > head_node->data_) temp = search_recursively(data, head_node->right); //look on the right for data more than
 		else temp = search_recursively(data, head_node->left); //look on the left for data less than
 		return temp;
 	}
@@ -106,13 +106,13 @@ namespace dt
 		if (head_node == nullptr)
 			return head_node;
 		// If the node key to be deleted is smaller move left
-		if (to_delete < head_node->key_)
+		if (to_delete < head_node->data_)
 			head_node->left = delete_node_recursive(to_delete, head_node->left);
 		// If the node key to be deleted is greater
-		else if (to_delete > head_node->key_)
+		else if (to_delete > head_node->data_)
 			head_node->right = delete_node_recursive(to_delete, head_node->right);
 		//to be deleted by default equality, else if ( to_delete == head_node)
-		else if (to_delete == head_node->key_)
+		else if (to_delete == head_node->data_)
 		{
 			// node with only one child or no child
 			if ((head_node->left == nullptr) || (head_node->right == nullptr))
@@ -126,7 +126,7 @@ namespace dt
 					return nullptr;
 				}//else... both are null
 				// Copy the in order successor's data to this node and assign null pointers
-				head_node->key_ = std::move(temp->key_);
+				head_node->data_ = std::move(temp->data_);
 				delete temp;
 				temp = nullptr;
 				head_node->right = nullptr;
@@ -138,7 +138,7 @@ namespace dt
 			// node with two children (smallest in the right subtree)
 			doubly_node<C>* temp = min_node(head_node->right);
 			// Copy the in order successor's data to this node
-			head_node->set_key(temp->key_);
+			head_node->set_key(temp->data_);
 			// Delete the in order successor
 			head_node->right = delete_node_recursive(temp, head_node->right);
 		}
@@ -185,7 +185,7 @@ namespace dt
 		//Perform rotation
 		y->left = x;
 		x->right = t2;
-		// Return new root_tree  
+		// Return new root_  
 		return y;
 	}
 	template<class C> doubly_node<C>* tree_set<C>::min_node(doubly_node<C>* head_node)
@@ -210,7 +210,7 @@ namespace dt
 		// Perform rotation
 		x->right = y;
 		y->left = t2;
-		// Return new root_tree  
+		// Return new root_  
 		return x;
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -220,23 +220,23 @@ namespace dt
 	/*
 			CONSTRUCTOR WITH A NEW OBJECT AS A PARAMETER
 						+-+------+-+
-					-----o| root_tree |o-----
+					-----o| root_ |o-----
 				   /    +-+------+-+    \
 				  /                      \
 				 /                        \
 			   NULL						 NULL
 	*/
-	template<class C> tree_set<C>::tree_set() : root_tree{ nullptr }, length_tree{ 0 } {}
-	template<class C> tree_set<C>::tree_set(C&& r_ref) : length_tree{ 1 }
+	template<class C> tree_set<C>::tree_set() : root_{ nullptr }, length_{ 0 } {}
+	template<class C> tree_set<C>::tree_set(C&& r_ref) : length_{ 1 }
 	{
 		//move to heap..
-		root_tree = new doubly_node<C>{ std::move(r_ref) };
+		root_ = new doubly_node<C>{ std::move(r_ref) };
 	}
-	template<class C> tree_set<C>::tree_set(const C& data) : root_tree{ new doubly_node<C>{ data } }, length_tree{ 1 } {}
-	template<class C> tree_set<C>::tree_set(const tree_set<C>& copy) : length_tree{ copy.size() }
+	template<class C> tree_set<C>::tree_set(const C& data) : root_{ new doubly_node<C>{ data } }, length_{ 1 } {}
+	template<class C> tree_set<C>::tree_set(const tree_set<C>& copy) : length_{ copy.size() }
 	{
 		line<doubly_node<C>*> q;
-		auto* temp{ copy.root_tree };
+		auto* temp{ copy.root_ };
 		q.push(temp);
 		//while the q is not empty add values left and right and pop them
 		while (q.is_empty() == false)
@@ -254,10 +254,10 @@ namespace dt
 			if (temp->right != nullptr) q.push(temp->right);
 		}
 	}
-	template<class C>tree_set<C>::tree_set(tree_set<C>&& r_set) noexcept : root_tree{ r_set.root_tree }, length_tree{ r_set.size() }
+	template<class C>tree_set<C>::tree_set(tree_set<C>&& r_set) noexcept : root_{ r_set.root_ }, length_{ r_set.size() }
 	{
 		//pointer dangling
-		r_set.root_tree = nullptr;
+		r_set.root_ = nullptr;
 	}
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -268,7 +268,7 @@ namespace dt
 
 										INSERT NODE
 										+-+------+-+
-									-----o| root_tree |o-----
+									-----o| root_ |o-----
 								   /    +-+------+-+    \
 								  /                      \
 						   +-+------+-+					     +-+------+-+
@@ -290,9 +290,9 @@ namespace dt
 	template<class C> bool tree_set<C>::add(const C& data)
 	{
 		//calling recursive method
-		if (!search_recursively(data, root_tree))
+		if (!search_recursively(data, root_))
 		{
-			root_tree = insert_recursively(data, root_tree);
+			root_ = insert_recursively(data, root_);
 			return true;
 		}
 		return false;
@@ -300,9 +300,9 @@ namespace dt
 	template<class C> bool tree_set<C>::add(C&& r_ref)
 	{
 		//calling recursive method
-		if (!search_recursively(r_ref, root_tree))
+		if (!search_recursively(r_ref, root_))
 		{
-			root_tree = insert_recursively(r_ref, root_tree);
+			root_ = insert_recursively(r_ref, root_);
 			return true;
 		}
 		return false;
@@ -315,20 +315,20 @@ namespace dt
 	//search for a value in the TREE SET and remove it
 	template<class C> bool tree_set<C>::remove(C& data)
 	{
-		if (search_recursively(data, root_tree))
+		if (search_recursively(data, root_))
 		{
-			root_tree = delete_node_recursive(data, root_tree);
-			--length_tree;
+			root_ = delete_node_recursive(data, root_);
+			--length_;
 			return true;
 		}
 		return false;
 	}
 	template<class C> bool tree_set<C>::remove(C&& r_ref)
 	{
-		if (search_recursively(r_ref, root_tree))
+		if (search_recursively(r_ref, root_))
 		{
-			root_tree = delete_node_recursive(std::move(r_ref), root_tree);
-			--length_tree;
+			root_ = delete_node_recursive(std::move(r_ref), root_);
+			--length_;
 			return true;
 		}
 		return false;
@@ -342,37 +342,37 @@ namespace dt
 	{
 		if (is_empty()) return false;
 		//call recursive delete
-		root_tree = delete_tree(root_tree);
-		//free root_tree
-		length_tree = 0;
+		root_ = delete_tree(root_);
+		//free root_
+		length_ = 0;
 		return true;
 
 	}
 	//check if the TREE SET is empty
 	template<class C> bool tree_set<C>::is_empty()
 	{
-		return root_tree == nullptr;
+		return root_ == nullptr;
 	}
 	//getter of size of tree_set
 	template<class C> unsigned int tree_set<C>::size() const
 	{
-		return length_tree;
+		return length_;
 	}
 	template<class C> tree_set<C>& tree_set<C>::operator=(const tree_set<C>& set)
 	{
 		if (&set == *this) return *this;
 		//copy tree
-		if (set.root_tree == nullptr)
+		if (set.root_ == nullptr)
 		{
-			root_tree = nullptr;
-			length_tree = 0;
+			root_ = nullptr;
+			length_ = 0;
 			return *this;
 		}
 		//delete current
 		delete this;
 		//empty queue list
 		line<doubly_node<C>*> q;
-		auto* temp{ set.root_tree };
+		auto* temp{ set.root_ };
 		q.push(temp);
 		//while the q is not empty add values left and right and pop them
 		while (q.is_empty() == false)
@@ -393,19 +393,19 @@ namespace dt
 		//avoid self assignment
 		if (&r_set == this) return *this;
 		//delete
-		if (root_tree != nullptr) delete this;
+		if (root_ != nullptr) delete this;
 		//transfer ownership
-		root_tree = r_set.root_tree;
+		root_ = r_set.root_;
 		return *this;
 	}
 	template<class C>
 	tree_set<C>& tree_set<C>::operator=(C&& r_value)
 	{
-		if (r_value == *(this)->root_tree) return *this;
-		if (root_tree != nullptr) delete this;
+		if (r_value == *(this)->root_) return *this;
+		if (root_ != nullptr) delete this;
 		//transfer ownership
-		root_tree = new doubly_node<C>{ std::move(r_value) };
-		length_tree = 1;
+		root_ = new doubly_node<C>{ std::move(r_value) };
+		length_ = 1;
 		return *this;
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
