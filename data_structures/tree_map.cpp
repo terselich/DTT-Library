@@ -20,11 +20,15 @@ namespace dt
 		if (std::hash<Key>(new_pair->key_) > std::hash<Key>(head_node->data.key_))
 		{
 			head_node->right = insert_recursively(new_pair, head_node->right);
+			//connect with parent
+			head_node->right->parent_ = head_node;
 		}
 		//when head is not null search path to be insert in BTS left
 		else if (std::hash<Key>(new_pair->key_) < std::hash<Key>(head_node->data.key_))
 		{
 			head_node->left = insert_recursively(new_pair, head_node->left);
+			//connect with parent
+			head_node->left->parent_ = head_node;
 		}
 		//default
 		return head_node;
@@ -66,6 +70,51 @@ namespace dt
 		//return temp
 		return temp;
 	}
+	//left rotation
+	template<class Key, class Value> void tree_map<Key, Value>::rotate_left(rb_node<Pair>*& root, rb_node<Pair>*& parent_x)
+	{
+		//temp T2
+		rb_node<Pair>* temp{ parent_x->right };
+		//right point to node_x (X)
+		parent_x->right = temp->left;
+		//connect parent right to parent_x (P)
+		if (parent_x->right != nullptr) parent_x->right->parent_ = parent_x;
+		//
+		temp->parent_ = parent_x->parent_;
+		//
+		if (parent_x->parent_ == nullptr) root = temp;
+
+		else if (parent_x == parent_x->parent_->left) parent_x->parent_->left = temp;
+
+		else parent_x->parent_->right = temp;
+
+		temp->left = parent_x;
+
+		parent_x->parent_ = temp;
+	}
+	//right rotation
+	template<class Key, class Value> void tree_map<Key, Value>::rotate_right(rb_node<Pair>*& root, rb_node<Pair>*& parent_x)
+	{
+		rb_node<Pair>* temp{ parent_x->left };
+
+		parent_x->left = temp->right;
+
+		if (parent_x->left != nullptr) parent_x->left->parent_ = parent_x;
+
+		temp->parent_ = parent_x->parent_;
+
+		if (parent_x->parent == nullptr)
+			root = temp;
+
+		else if (parent_x == parent_x->parent->left)
+			parent_x->parent->left = temp;
+
+		else
+			parent_x->parent->right = temp;
+
+		temp->right = parent_x;
+		parent_x->parent = temp;
+	}
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	//																				CONSTRUCTORS
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +135,7 @@ namespace dt
 	//insert data a new node
 	/*
 	
-										INSERT NODE
+										   INSERT NODE
 									    +-+-----------+-+
 									-----o| root_tree |o------
 								   /    +-+-----------+-+     \
@@ -121,8 +170,34 @@ namespace dt
 		if(!search_recursively(r_ref.key_, root_))
 		{
 			root_ = insert_recursively(std::move(r_ref), root_);
+			//fix insertion violation
 			return true;
 		}
 		return false;
+	}
+	template<class Key, class Value> bool tree_map<Key, Value>::add(Key&& r_key, Value&& r_val)
+	{
+		if (!search_recursively(r_key, root_))
+		{
+			root_ = insert_recursively(std::move(pair<Key, Value>{ std::move(r_key), std::move(r_val) }));
+			length_++;
+			return  true;
+		}
+		return false;
+	}
+	template<class Key, class Value> bool tree_map<Key, Value>::add(Pair* pointer)
+	{
+		return add(*pointer);
+	}
+
+	//check if the map is empty
+	template<class Key, class Value> bool tree_map<Key, Value>::is_empty() const
+	{
+		return length_ == 0;
+	}
+	template<class Key, class Value>
+	size_t tree_map<Key, Value>::size() const
+	{
+		return length_;
 	}
 }

@@ -22,6 +22,7 @@ namespace  dt
 	protected:
 		template<class S> friend class doubly_list;
 		template<class S> friend class tree_set;
+		template<class K, class C> friend class tree_map;
 		//----------------------------------
 		//			DATA MEMBERS
 		//----------------------------------

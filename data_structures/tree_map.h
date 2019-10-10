@@ -35,9 +35,11 @@ namespace dt
 		//insert node pointer
 		rb_node<Pair>* insert_recursively(const Pair& new_pair, rb_node<Pair>* head_node);
 		rb_node<Pair>* insert_recursively(Pair&& new_pair, rb_node<Pair>* head_node);
-
 		//search node
 		bool search_recursively(const Key& key, rb_node<Pair>* head_node);
+		//rotations
+		void rotate_left(rb_node<Pair>*& root, rb_node<Pair>*& parent_x);
+		void rotate_right(rb_node<Pair>*& parent, rb_node<Pair>*& x_node);
 	public:
 		//----------------------------------
 		//				CONSTRUCTORS
@@ -53,6 +55,7 @@ namespace dt
 		//----------------------------------
 		bool add(const Pair& data);
 		bool add(Pair&& r_ref);
+		bool add(Key&& r_key, Value&& r_val);
 		bool add(Pair* pointer);
 		//remove in the Tree
 		bool remove(Pair& data);
@@ -60,7 +63,7 @@ namespace dt
 		bool remove(Pair* pointer);
 		//clear set, is empty?
 		bool empty();
-		bool is_empty();
+		bool is_empty() const;
 		//getters
 		size_t size() const;
 		//operator overloading

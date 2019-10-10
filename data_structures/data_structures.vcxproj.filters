@@ -80,9 +80,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="array_list.cpp">
-      <Filter>Sequential\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="linked_list.cpp">
       <Filter>Sequential\Source Files</Filter>
     </ClCompile>
@@ -91,9 +88,6 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Helpers\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tree_set.cpp">
-      <Filter>Associative\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tree_map.cpp">
       <Filter>Associative\Source Files</Filter>
