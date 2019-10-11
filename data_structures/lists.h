@@ -14,8 +14,6 @@
 */
 //defines
 #pragma once
-#include <utility>
-#include <stdexcept>
 
 namespace dt
 {
@@ -39,8 +37,8 @@ namespace dt
 		virtual bool is_empty() const = 0;
 		virtual bool empty() = 0;
 		//getter
-		virtual size_t size() const = 0;
-		virtual E& get_at(size_t index) = 0;
+		virtual int size() const = 0;
+		virtual E& get_at(int index) = 0;
 		//----------------------------------
 		//			 DESTRUCTOR
 		//----------------------------------	

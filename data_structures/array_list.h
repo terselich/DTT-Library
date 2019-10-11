@@ -15,6 +15,8 @@
 
 //includes...
 #include "lists.h"
+#include <utility>
+#include <stdexcept>
 
 namespace dt
 {
@@ -25,20 +27,20 @@ namespace dt
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		//																					 DATA MEMBERS
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		size_t capacity_;
-		size_t length_;
-		size_t front_index;
+		int capacity_;
+		int length_;
+		int front_index;
 		//pointer array
 		Data_type* array_;
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		//																			PRIVATE METHOD MEMBERS
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-		bool resize(const size_t new_capacity)
+		bool resize(const int new_capacity)
 		{
 			auto* temp = new Data_type[new_capacity];
 			//copy array to new array with new capacity
-			for (size_t i{ 0 }; i < length_; ++i)
+			for (auto i{ 0 }; i < length_; ++i)
 			{
 				//transfer ownership of every element
 				temp[i] = std::move(array_[(front_index + i) % capacity_]);
@@ -62,18 +64,18 @@ namespace dt
 		//																				CONSTRUCTORS
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
-		explicit array_list(size_t&& capacity = 10) : capacity_{ std::move(capacity) },
+		explicit array_list(int&& capacity = 10) : capacity_{ std::move(capacity) },
 													  length_{ 0 }, front_index{ 0 },
 													  array_{ new Data_type[capacity_] } {}
 		
-		explicit array_list(Data_type&& r_ref) : capacity_{ 10 }, length_{ 1 },
+		/*explicit array_list(Data_type&& r_ref) : capacity_{ 10 }, length_{ 1 },
 												 front_index{ 0 }
 		{
 			//allocate new memory type S times capacity of the array
 			array_ = new Data_type[capacity_];
 			//move r_ref to first position
 			array_[0] = std::move(r_ref);
-		}
+		}*/
 		
 		explicit array_list(const Data_type& data) : capacity_{ 10 }, length_{ 1 }, front_index{ 0 }
 		{
@@ -83,7 +85,7 @@ namespace dt
 			array_[0] = data;
 		}
 		
-		explicit array_list(const Data_type&& fill_with, size_t&& times) : capacity_{ times },
+		explicit array_list(const Data_type&& fill_with, int&& times) : capacity_{ times },
 																   length_{ std::move(times) },
 																   front_index{ 0 },
 																   array_{ new Data_type[times] }
@@ -123,7 +125,7 @@ namespace dt
 		bool append(const Data_type& data) override
 		{
 			//resize case
-			if (length_ >= capacity_) resize(static_cast<size_t>(capacity_ * 1.5));
+			if (length_ >= capacity_) resize(static_cast<int>(capacity_ * 1.5));
 			//insert at length index module capacity
 			array_[(front_index + length_) % capacity_] = data;
 			//increase length
@@ -135,7 +137,7 @@ namespace dt
 		bool append(Data_type&& r_ref) override
 		{
 			//resize case
-			if (length_ >= capacity_) resize(static_cast<size_t>(capacity_ * 1.5));
+			if (length_ >= capacity_) resize(static_cast<int>(capacity_ * 1.5));
 			//add end index length 
 			array_[(front_index + length_) % capacity_] = std::move(r_ref);
 			//increase length
@@ -153,7 +155,7 @@ namespace dt
 		bool push(const Data_type& data) override
 		{
 			//resize case
-			if (length_ >= capacity_) resize(static_cast<size_t>(capacity_ * 1.5));
+			if (length_ >= capacity_) resize(static_cast<int>(capacity_ * 1.5));
 			//decrement front_index
 			if (front_index == 0) front_index = capacity_ - 1;
 			//decrement front index
@@ -169,7 +171,7 @@ namespace dt
 		bool push(Data_type&& r_ref) override
 		{
 			//resize case
-			if (length_ >= capacity_) resize(static_cast<size_t>(capacity_ * 1.5));
+			if (length_ >= capacity_) resize(static_cast<int>(capacity_ * 1.5));
 			//decrement front_index
 			if (front_index == 0) front_index = capacity_ - 1;
 			else --front_index;
@@ -230,23 +232,23 @@ namespace dt
 		}
 		
 		//getters
-		size_t size() const override
+		int size() const override
 		{
 			return length_;
 		}
 		
-		size_t capacity() const
+		int capacity() const
 		{
 			return capacity_;
 		}
 		
-		Data_type& get_at(size_t index) const
+		Data_type& get_at(int index) const
 		{
 			if (index >= length_) throw std::out_of_range("Out of bounds index");
 			return array_[(front_index + index) % capacity_];
 		}
 		
-		Data_type& get_at(size_t index) override
+		Data_type& get_at(int index) override
 		{
 			return const_cast<Data_type&>(const_cast<const array_list*>(this)->get_at(index));
 		}
@@ -261,7 +263,7 @@ namespace dt
 			{
 				this->front_index = 0;
 				//copy value
-				for (size_t i{ 0 }; i < copy.length_; ++i) this->array_[i] = copy.array_[(copy.front_index + i) % copy.capacity_];
+				for (auto i{ 0 }; i < copy.length_; ++i) this->array_[i] = copy.array_[(copy.front_index + i) % copy.capacity_];
 				//update length
 				this->length_ = copy.length_;
 				return *this;
@@ -274,7 +276,7 @@ namespace dt
 			//copy elements, and organize array
 			this->front_index = 0;
 			//copy value, organize them as regular array
-			for (size_t i{ 0 }; i < copy.length_; ++i) this->array_[i] = copy.array_[(copy.front_index + i) % copy.capacity_];
+			for (auto i{ 0 }; i < copy.length_; ++i) this->array_[i] = copy.array_[(copy.front_index + i) % copy.capacity_];
 			//update length
 			this->length_ = copy.length_;
 			return *this;
@@ -293,7 +295,7 @@ namespace dt
 		}
 		
 		//[]
-		Data_type& operator[](const size_t index)
+		Data_type& operator[](const int index)
 		{
 			if (index >= length_) throw std::out_of_range("Out of bounds index");
 			//when is less than length(in bounds case)

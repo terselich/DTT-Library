@@ -24,7 +24,7 @@ namespace dt
 	template <class Data_type = int> class tree_set
 	{
 		using _NODE_ = doubly_node<Data_type>;
-		using _TREESET_ = tree_set<Data_type>;
+		using _AVL_ = tree_set<Data_type>;
 		
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		//																					 DATA MEMBERS
@@ -32,7 +32,7 @@ namespace dt
 		//_head of the Tree-set, size MEMBER VARIABLES
 
 		_NODE_* root_;
-		unsigned int length_;
+		int length_;
 		
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		//																				RECURSIVE PRIVATE METHODS
@@ -279,7 +279,7 @@ namespace dt
 		
 		explicit tree_set(const Data_type& data) : root_{ new _NODE_{ data } }, length_{ 1 } {}
 		
-		tree_set(const _TREESET_& copy)
+		tree_set(const _AVL_& copy)
 		{
 			std::queue<_NODE_*> q;
 			auto* temp{ copy.root_ };
@@ -298,7 +298,7 @@ namespace dt
 			}
 		}
 		
-		tree_set(_TREESET_&& r_set) noexcept : root_{ r_set.root_ }, length_{ r_set.size() }
+		tree_set(_AVL_&& r_set) noexcept : root_{ r_set.root_ }, length_{ r_set.size() }
 		{
 			//pointer dangling
 			r_set.root_ = nullptr;
@@ -408,13 +408,13 @@ namespace dt
 		}
 		
 		//getters
-		unsigned int size() const
+		int size() const
 		{
 			return length_;
 		}
 		
 		//operator overloading
-		auto operator=(const _TREESET_& set) -> tree_set&
+		auto operator=(const _AVL_& set) -> tree_set&
 		{
 			if (&set == this) return *this;
 			//copy tree
@@ -446,7 +446,7 @@ namespace dt
 		}
 		
 		//move assignment operator
-		auto operator=(_TREESET_&& r_set) noexcept -> tree_set&
+		auto operator=(_AVL_&& r_set) noexcept -> tree_set&
 		{
 			//avoid self assignment
 			if (&r_set == this) return *this;

@@ -70,14 +70,14 @@ namespace dt
 			return list_.pull();
 		}
 		//removes and returns element removed
-		Class& poll()
+		Class poll()
 		{
 			//when the list is empty case
 			if (list_.size() == 0) throw std::range_error("Array length_ is 0");
-			//create copy of head/front
+			//create copy of head/front, stack locally
 			Class copy{ list_[0] };
 			list_.pull();
-			return copy;
+			return std::move(copy);
 		}
 		bool empty()
 		{
