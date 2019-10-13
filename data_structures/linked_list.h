@@ -439,17 +439,15 @@ namespace dt
 			if (&list == this) return *this;
 			//delete current list
 			if (_head != nullptr && _tail != nullptr) this->empty();
-			const Data_type _head_temp = list._head->key_;
 			//copy list.
 			_length = list.size();
-			_head = new _NODE_{ _head_temp };
+			_head = new _NODE_{ *list._head->key_ };
 			_NODE_* a{ list._head->next }, * b{ _head };
 			//copy every node in the same order
 			while (a != nullptr)
 			{
-				//T temp local
-				const Data_type temp = a->key_;
-				b->next = new _NODE_{ temp };
+				//create a copy and pass it to new node
+				b->next = new _NODE_{ *a->key_ };
 				a = a->next;
 				b = b->next;
 			}
@@ -474,7 +472,6 @@ namespace dt
 			r_value_list._tail = nullptr;
 			//return statement
 			return *this;
-
 		}
 		
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
