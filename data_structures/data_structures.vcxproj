@@ -161,7 +161,7 @@
     <ClInclude Include="lists.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Pile.h" />
+    <ClInclude Include="pile.h" />
     <ClInclude Include="rb_node.h" />
     <ClInclude Include="tree_map.h" />
     <ClInclude Include="tree_set.h" />

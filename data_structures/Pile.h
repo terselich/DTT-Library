@@ -163,6 +163,8 @@ namespace dt
 
 		pile& operator=(_STACK_&& r_pile) noexcept
 		{
+			//self assignment, compare addresses
+			if (&r_pile == this) return *this;
 			list_ = r_pile.list_;
 			return  *this;
 		}

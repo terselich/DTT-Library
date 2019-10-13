@@ -60,7 +60,7 @@
     <ClInclude Include="line.h">
       <Filter>Adapters</Filter>
     </ClInclude>
-    <ClInclude Include="Pile.h">
+    <ClInclude Include="pile.h">
       <Filter>Adapters</Filter>
     </ClInclude>
   </ItemGroup>

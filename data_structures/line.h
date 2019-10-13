@@ -127,13 +127,10 @@ namespace dt
 		
 		line& operator=(_QUEUE_&& r_line) noexcept
 		{
+			//self assignment
+			if (&r_line == this) return *this;
+			//else..
 			this->list_ = std::move(r_line);
-			return *this;
-		}
-		
-		line < Class, Sequence>& operator=(linked_list<Class>&& r_list) noexcept
-		{
-			this->list_ = std::move(r_list);
 			return *this;
 		}
 		
