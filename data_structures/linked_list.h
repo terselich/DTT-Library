@@ -25,11 +25,13 @@ namespace dt
 	{
 		using _NODE_ = node<Data_type>;
 		using _LINKED_ = linked_list<Data_type>;
+		
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		//																				DATA MEMBERS
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		_NODE_* _head, * _tail;
 		int _length;
+		
 	public:
 		//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		//																				CONSTRUCTORS
@@ -59,17 +61,14 @@ namespace dt
 		//copy constructor
 		linked_list(const _LINKED_& source) : _length{ source.size() }
 		{
-			//temp _head
-			const Data_type _head_temp = source._head->key_;
-			//copy list.
-			_head = new _NODE_{ _head_temp };
+			//copy list. *() copies data
+			_head = new _NODE_{ *source._head->key_ };
 			_NODE_* a{ source._head->next }, * b{ _head };
 			//copy every node in the same order
 			while (a != nullptr)
 			{
-				//T temp local
-				const Data_type temp = a->key_;
-				b->next = new _NODE_{ temp };
+				//copy a key
+				b->next = new _NODE_{ *a->key_ };
 				a = a->next;
 				b = b->next;
 			}
@@ -249,7 +248,7 @@ namespace dt
 			auto* temp = _head;
 			//head moves one forward, check if head is not null
 			_head = _head->next;
-			//delete temp, next nullptr ~node destructor
+			//delete temp, next NULL ~node destructor
 			delete temp;
 			//decrease _length by 1
 			--_length;
