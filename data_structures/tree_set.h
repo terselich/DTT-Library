@@ -365,7 +365,7 @@ namespace dt
 		{
 			if (search_recursively(data, root_))
 			{
-				//delete, decrease length and return true
+				//delete, decrease length and return true(pre-incremental statement)
 				root_ = delete_node_recursive(data, root_);
 				--length_;
 				return true;
